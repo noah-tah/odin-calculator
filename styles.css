@@ -5,6 +5,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-color: #008080;
 }
 
 #calculator-container {
@@ -12,35 +13,48 @@ body {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    gap: 50px;
-    background-color: black;
-    height:600px ;
-    width: 500px;
-    margin-top: 100px;
+    gap: 20px;
+    background-color:#065535;
+    background: linear-gradient(-45deg, #065535, green);
+    padding-top: 10px;
+    padding-bottom: 20px;
+    padding-right: 40px;
+    padding-left: 40px;
+    margin-top: 50px;
+    box-shadow: black 0 0 9px 9px;
 }
 
 #calculator-screen {
-    width: 450px;
-    height: 150px;
-    background-color: gray;
+    padding-left: 250px;
+    padding-right: 250px;
+    padding-top: 140px;
+    padding-bottom: 140px;
+    background-color: lightgrey;
     margin-top: 20px;
+    background: linear-gradient(45deg, lightgrey, gray);
 }
 
 #buttons-container{
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 5px;
 }
 
 .row-styles {
     display: flex;
-    gap: 25px;
+    gap: 5px;
+    flex: 1;
 }
 
 .curved-borders {
-    border-radius: 1em;
+    border-radius: .5em;
 }
 
 .button-styles {
-    padding: 25px;
+    padding: 49px;
+    font-size: 40px;
+    box-shadow:black 0 0 1px 1px;
+    flex: 1;
 }
+
+
