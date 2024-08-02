@@ -52,6 +52,10 @@ body {
     box-shadow: inset black 0 0 2px 2px;
 }
 
+#number-line {
+    display: flex;
+}
+
 .row-styles {
     display: flex;
     gap: 1px;
@@ -69,4 +73,7 @@ body {
     box-shadow: inset black 0 0 2px 2px;
 }
 
-
+.numbers {
+    color: black;
+    font-size: 30px;
+}
