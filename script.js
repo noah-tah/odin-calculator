@@ -1,6 +1,8 @@
 let firstNum = '';
 let secondNum = '';
 let operand = '';
+const numRange = "0123456789";
+const mathRange = "/*-+=.";
 document.addEventListener("DOMContentLoaded", () => {
     const screen = document.querySelector("#calculator-screen");
     const buttons = getButtons();
@@ -21,8 +23,6 @@ function getButtons() {
 
 
 function handleButtonClick(choice) {
-    const numRange = "0123456789";
-    const mathRange = "/*-+=.";
     if (choice.toLowerCase() === "clear") {
         clearScreen();
     } else if (numRange.includes(choice)) {
@@ -31,7 +31,7 @@ function handleButtonClick(choice) {
             displayNum(firstNum);
         } else {
             secondNum += choice;
-            displayNum(secondNum);
+            displayNum(firstNum);
         }
     } else if (choice === "=") {
         displayNum(operate(firstNum, secondNum, operand));
@@ -95,7 +95,14 @@ function multiply(a, b) {
 
 
 function operandSelected(operand) {
-    console.log(operand);
-    const operandButton = document.querySelector(`#${operand}`);
-    operandButton.classList.add("button-pressed");
+    if (mathRange.includes(operand)) {
+        const operandButton = document.querySelector(`#${CSS.escape(operand)}`);
+        if (operandButton) {
+            operandButton.classList.add("button-pressed");
+        } else {
+            console.warn(`No element found with ID: ${operand}`);
+        }
+    } else {
+        console.warn(`Operand ${operand} is not in the mathRange.`);
+    }
 }

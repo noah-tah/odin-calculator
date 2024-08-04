@@ -79,5 +79,5 @@ body {
 }
 
 .button-pressed {
-    opacity: 0.5;
+    background-color: gray;
 }
