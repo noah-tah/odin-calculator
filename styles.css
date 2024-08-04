@@ -77,3 +77,7 @@ body {
     color: black;
     font-size: 30px;
 }
+
+.button-pressed {
+    opacity: 0.5;
+}

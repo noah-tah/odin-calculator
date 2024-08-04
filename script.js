@@ -18,6 +18,8 @@ function getButtons() {
     return buttonsArray;
 }
 
+
+
 function handleButtonClick(choice) {
     const numRange = "0123456789";
     const mathRange = "/*-+=.";
@@ -26,19 +28,22 @@ function handleButtonClick(choice) {
     } else if (numRange.includes(choice)) {
         if (operand === '') {
             firstNum += choice; 
+            displayNum(firstNum);
         } else {
             secondNum += choice;
+            displayNum(secondNum);
         }
     } else if (choice === "=") {
-        operate(firstNum, secondNum, operator);
+        displayNum(operate(firstNum, secondNum, operand));
     } else if (mathRange.includes(choice)){
         operand = choice;
+        operandSelected(operand);
+        displayNum(operand);
     } else {
-        operate(firstNum, secondNum, operator);
+        console.log("if statement fired");
+        displayNum((operate(firstNum, secondNum, operand)));
     }
 }
-
-
 
 function getClearButton() {
     const clearButton = document.querySelector("#clear-button");
@@ -47,6 +52,7 @@ function getClearButton() {
         return choice;
     });
 }
+
 function displayNum(choice) {
     const numberLine = document.querySelector("#number-line");
     const number = document.createElement('p');
@@ -58,15 +64,17 @@ function displayNum(choice) {
 function operate(x, y, operator) {
     x = parseFloat(x);
     y = parseFloat(y);
+    let result;
     if (operator === "+") {
-        add(x, y);
+        result = add(x, y);
     } else if (operator === "-") {
-        subtract(x, y);
+        result = subtract(x, y);
     } else if (operator === "/") {
-        divide(x, y);
+        result = divide(x, y);
     } else if (operator === "*") {
-        multiply(x, y);
+        result = multiply(x, y);
     }
+    return result;
 }
 
 function add(a, b) {
@@ -86,3 +94,8 @@ function multiply(a, b) {
 }
 
 
+function operandSelected(operand) {
+    console.log(operand);
+    const operandButton = document.querySelector(`#${operand}`);
+    operandButton.classList.add("button-pressed");
+}
