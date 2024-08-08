@@ -20,7 +20,7 @@ function getButtons() {
     return buttonsArray;
 }
 
-
+// TODO: When secondNum is selected, remove the appearance of operand button being pressed visually.
 
 function handleButtonClick(choice) {
     if (choice.toLowerCase() === "clear") {
@@ -31,6 +31,7 @@ function handleButtonClick(choice) {
             displayNum(firstNum);
         } else {
             secondNum += choice;
+            removeOperandSelected(operand);
             displayNum(firstNum);
         }
     } else if (choice === "=") {
@@ -104,5 +105,27 @@ function operandSelected(operand) {
         }
     } else {
         console.warn(`Operand ${operand} is not in the mathRange.`);
+    }
+}
+
+function clearScreen() {
+    const numberLine = document.querySelector("#number-line");
+    const numberList = document.querySelectorAll("#numbers");
+    if (numberLine) {
+        for (i = 0; i < numberList; i++) {
+            number.remove(i);
+        }
+        numbersList.remove();
+       } else {
+        console.warn(`No numberLine exists`)
+    }
+}
+
+function removeOperandSelected(operand) {
+    const operandButton = document.querySelector(`#${CSS.escape(operand)}`);
+    if (operandButton) {
+        operandButton.classList.remove("button-pressed");
+    } else {
+        console.warn(`No element found with ID: ${operand}`);
     }
 }
