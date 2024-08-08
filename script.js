@@ -20,7 +20,8 @@ function getButtons() {
     return buttonsArray;
 }
 
-// TODO: When secondNum is selected, remove the appearance of operand button being pressed visually.
+// ! clearScreen() still not working
+// ? What is going on here?
 
 function handleButtonClick(choice) {
     if (choice.toLowerCase() === "clear") {
@@ -108,18 +109,6 @@ function operandSelected(operand) {
     }
 }
 
-function clearScreen() {
-    const numberLine = document.querySelector("#number-line");
-    const numberList = document.querySelectorAll("#numbers");
-    if (numberLine) {
-        for (i = 0; i < numberList; i++) {
-            number.remove(i);
-        }
-        numbersList.remove();
-       } else {
-        console.warn(`No numberLine exists`)
-    }
-}
 
 function removeOperandSelected(operand) {
     const operandButton = document.querySelector(`#${CSS.escape(operand)}`);
@@ -127,5 +116,19 @@ function removeOperandSelected(operand) {
         operandButton.classList.remove("button-pressed");
     } else {
         console.warn(`No element found with ID: ${operand}`);
+    }
+}
+
+// TODO: Make clearScreen() work
+// Dont delete numberLine, just the numbers
+function clearScreen() {
+    const numberLine = document.querySelector("#number-line");
+    if (numberLine) {
+        const numberList = document.querySelectorAll(".numbers");
+        for (i = 0; i < numberList.length; i++) {
+            numberLine.removeChild(numberList[i]);
+        }
+       } else {
+        console.warn(`No element found within ID: number-line`);
     }
 }
