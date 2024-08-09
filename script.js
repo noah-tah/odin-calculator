@@ -4,13 +4,14 @@ let operand = '';
 let operandSelected = false;
 let resultDisplayed = false;
 const numRange = "0123456789";
-const mathRange = "/*-+=.";
+const mathRange = "/*-+=";
 
 document.addEventListener("DOMContentLoaded", () => {
     const screen = document.querySelector("#calculator-screen");
     const buttons = getButtons();
     const clearButton = getClearButton();
 });
+// TODO: implement decimal functionality
 
 function handleButtonClick(choice) {
     if (choice.toLowerCase() === "clear") {
@@ -27,6 +28,7 @@ function handleButtonClick(choice) {
         }
         if (operand === '') {
             firstNum += choice; 
+            clearScreen();
             displayNum(firstNum);
         } else {
             secondNum += choice;
@@ -141,9 +143,6 @@ function removeOperandSelected(operand) {
 }
 
 function clearScreen() {
-    firstNum = '';
-    secondNum = '';
-    operand = '';
     resultDisplayed = false;
     const numberLine = document.querySelector("#number-line");
     if (numberLine) {
