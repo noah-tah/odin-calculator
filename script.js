@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function handleButtonClick(choice) {
     if (choice.toLowerCase() === "clear") {
+        removeOperandSelected(operand);
         clearScreen();
         clearChoices();
     } else if (numRange.includes(choice)) {
@@ -97,6 +98,10 @@ function subtract(a, b) {
 }
 
 function divide(a, b) {
+    if (b === 0) {
+        let message = "Cannot divide by your hopes and dreams."
+        displayNum(message);
+    }
     return a / b;
 }
 
