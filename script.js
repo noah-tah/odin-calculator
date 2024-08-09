@@ -19,6 +19,7 @@ function getButtons() {
     }
     return buttonsArray;
 }
+// TODO: don't display operand
 
 function handleButtonClick(choice) {
     if (choice.toLowerCase() === "clear") {
@@ -30,15 +31,15 @@ function handleButtonClick(choice) {
         } else {
             secondNum += choice;
             removeOperandSelected(operand); // gets rid of button pressed background color
-            removeFirstNumber();
+            removeCurrentNumber();
             displayNum(firstNum);
         }
     } else if (choice === "=") {
+        removeCurrentNumber();
         displayNum(operate(firstNum, secondNum, operand));
     } else if (mathRange.includes(choice)){
         operand = choice;
         operandSelected(operand);
-        displayNum(operand);
     } else {
         console.log("if statement fired");
         displayNum((operate(firstNum, secondNum, operand)));
@@ -129,7 +130,7 @@ function clearScreen() {
     }
 }
 
-function removeFirstNumber() {
+function removeCurrentNumber() {
     const numberLine = document.querySelector("#number-line");
     if (numberLine) {
         const firstNum = document.querySelector(".numbers");
