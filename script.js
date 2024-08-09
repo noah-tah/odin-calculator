@@ -20,9 +20,6 @@ function getButtons() {
     return buttonsArray;
 }
 
-// ! clearScreen() still not working
-// ? What is going on here?
-
 function handleButtonClick(choice) {
     if (choice.toLowerCase() === "clear") {
         clearScreen();
@@ -32,7 +29,8 @@ function handleButtonClick(choice) {
             displayNum(firstNum);
         } else {
             secondNum += choice;
-            removeOperandSelected(operand);
+            removeOperandSelected(operand); // gets rid of button pressed background color
+            removeFirstNumber();
             displayNum(firstNum);
         }
     } else if (choice === "=") {
@@ -119,8 +117,6 @@ function removeOperandSelected(operand) {
     }
 }
 
-// TODO: Make clearScreen() work
-// Dont delete numberLine, just the numbers
 function clearScreen() {
     const numberLine = document.querySelector("#number-line");
     if (numberLine) {
@@ -131,4 +127,19 @@ function clearScreen() {
        } else {
         console.warn(`No element found within ID: number-line`);
     }
+}
+
+function removeFirstNumber() {
+    const numberLine = document.querySelector("#number-line");
+    if (numberLine) {
+        const firstNum = document.querySelector(".numbers");
+        if (firstNum) {
+            numberLine.removeChild(firstNum);
+        } else {
+            console.warn("No element found within class`: numbers");
+        }
+    } else {
+        console.warn("No element found within ID: number-line");
+    }
+
 }
