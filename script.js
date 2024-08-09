@@ -1,30 +1,26 @@
 let firstNum = '';
 let secondNum = '';
 let operand = '';
+let resultDisplayed = false;
 const numRange = "0123456789";
 const mathRange = "/*-+=.";
+
 document.addEventListener("DOMContentLoaded", () => {
     const screen = document.querySelector("#calculator-screen");
     const buttons = getButtons();
     const clearButton = getClearButton();
 });
 
-function getButtons() {
-    const buttonsArray = document.querySelectorAll(".buttons");
-    for (let button of buttonsArray) {
-        button.addEventListener("click", () => {
-            let choice = button.innerHTML;
-            handleButtonClick(choice);
-        });
-    }
-    return buttonsArray;
-}
-// TODO: don't display operand
-
 function handleButtonClick(choice) {
     if (choice.toLowerCase() === "clear") {
         clearScreen();
+        clearChoices();
     } else if (numRange.includes(choice)) {
+        if (resultDisplayed) {
+            clearScreen();
+            clearChoices();
+            resultDisplayed = false;
+        }
         if (operand === '') {
             firstNum += choice; 
             displayNum(firstNum);
@@ -37,6 +33,8 @@ function handleButtonClick(choice) {
     } else if (choice === "=") {
         removeCurrentNumber();
         displayNum(operate(firstNum, secondNum, operand));
+        clearChoices();
+        resultDisplayed = true;
     } else if (mathRange.includes(choice)){
         operand = choice;
         operandSelected(operand);
@@ -45,6 +43,18 @@ function handleButtonClick(choice) {
         displayNum((operate(firstNum, secondNum, operand)));
     }
 }
+
+function getButtons() {
+    const buttonsArray = document.querySelectorAll(".buttons");
+    for (let button of buttonsArray) {
+        button.addEventListener("click", () => {
+            let choice = button.innerHTML;
+            handleButtonClick(choice);
+        });
+    }
+    return buttonsArray;
+}
+
 
 function getClearButton() {
     const clearButton = document.querySelector("#clear-button");
@@ -122,6 +132,7 @@ function clearScreen() {
     firstNum = '';
     secondNum = '';
     operand = '';
+    resultDisplayed = false;
     const numberLine = document.querySelector("#number-line");
     if (numberLine) {
         const numberList = document.querySelectorAll(".numbers");
@@ -131,6 +142,7 @@ function clearScreen() {
        } else {
         console.warn(`No element found within ID: number-line`);
     }
+
     
 }
 
@@ -147,4 +159,11 @@ function removeCurrentNumber() {
         console.warn("No element found within ID: number-line");
     }
 
+}
+
+function clearChoices() {
+    firstNum = '';
+    secondNum = '';
+    operand = '';
+    resultDisplayed = false;
 }
