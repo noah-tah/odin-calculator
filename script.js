@@ -30,9 +30,9 @@ function handleButtonClick(choice) {
             displayNum(firstNum);
         } else {
             secondNum += choice;
-            removeOperandSelected(operand); // gets rid of button pressed background color
+            removeOperandSelected(operand); 
             removeCurrentNumber();
-            displayNum(firstNum);
+            displayNum(secondNum);
         }
     } else if (choice === "=") {
         removeCurrentNumber();
@@ -107,10 +107,6 @@ function subtract(a, b) {
 }
 
 function divide(a, b) {
-    // if (b === 0) {
-    //     let message = "Cannot divide by your hopes and dreams."
-    //     displayNum(message);
-    // }
     return a / b;
 }
 
