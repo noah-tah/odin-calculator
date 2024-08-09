@@ -119,6 +119,9 @@ function removeOperandSelected(operand) {
 }
 
 function clearScreen() {
+    firstNum = '';
+    secondNum = '';
+    operand = '';
     const numberLine = document.querySelector("#number-line");
     if (numberLine) {
         const numberList = document.querySelectorAll(".numbers");
@@ -128,6 +131,7 @@ function clearScreen() {
        } else {
         console.warn(`No element found within ID: number-line`);
     }
+    
 }
 
 function removeCurrentNumber() {
@@ -137,7 +141,7 @@ function removeCurrentNumber() {
         if (firstNum) {
             numberLine.removeChild(firstNum);
         } else {
-            console.warn("No element found within class`: numbers");
+            console.warn("No element found within class: numbers");
         }
     } else {
         console.warn("No element found within ID: number-line");
