@@ -1,6 +1,7 @@
 let firstNum = '';
 let secondNum = '';
 let operand = '';
+let operandSelected = false;
 let resultDisplayed = false;
 const numRange = "0123456789";
 const mathRange = "/*-+=.";
@@ -13,7 +14,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function handleButtonClick(choice) {
     if (choice.toLowerCase() === "clear") {
-        removeOperandSelected(operand);
+        if (operandSelected) {
+            removeOperandSelected(operand);
+        };
         clearScreen();
         clearChoices();
     } else if (numRange.includes(choice)) {
@@ -38,7 +41,7 @@ function handleButtonClick(choice) {
         resultDisplayed = true;
     } else if (mathRange.includes(choice)){
         operand = choice;
-        operandSelected(operand);
+        showOperandSelected(operand);
     } else {
         console.log("if statement fired");
         displayNum((operate(firstNum, secondNum, operand)));
@@ -82,7 +85,13 @@ function operate(x, y, operator) {
     } else if (operator === "-") {
         result = subtract(x, y);
     } else if (operator === "/") {
-        result = divide(x, y);
+        if (x === 0 && y === 0) {
+            result = "Cannot divide hopes and dreams either.";
+        } else if (y === 0) {
+            result = "Cannot divide by dreams.";
+        } else {
+            result = divide(x, y);
+        }
     } else if (operator === "*") {
         result = multiply(x, y);
     }
@@ -98,10 +107,10 @@ function subtract(a, b) {
 }
 
 function divide(a, b) {
-    if (b === 0) {
-        let message = "Cannot divide by your hopes and dreams."
-        displayNum(message);
-    }
+    // if (b === 0) {
+    //     let message = "Cannot divide by your hopes and dreams."
+    //     displayNum(message);
+    // }
     return a / b;
 }
 
@@ -110,11 +119,12 @@ function multiply(a, b) {
 }
 
 
-function operandSelected(operand) {
+function showOperandSelected(operand) {
     if (mathRange.includes(operand)) {
         const operandButton = document.querySelector(`#${CSS.escape(operand)}`);
         if (operandButton) {
             operandButton.classList.add("button-pressed");
+            operandSelected = true;
         } else {
             console.warn(`No element found with ID: ${operand}`);
         }
@@ -128,6 +138,7 @@ function removeOperandSelected(operand) {
     const operandButton = document.querySelector(`#${CSS.escape(operand)}`);
     if (operandButton) {
         operandButton.classList.remove("button-pressed");
+        operandSelected = false;
     } else {
         console.warn(`No element found with ID: ${operand}`);
     }
