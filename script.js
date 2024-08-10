@@ -4,7 +4,8 @@ let operand = '';
 let operandSelected = false;
 let resultDisplayed = false;
 const numRange = "0123456789";
-const mathRange = "/*-+=";
+const mathRange = "/*-+";
+const decimal = ".";
 
 document.addEventListener("DOMContentLoaded", () => {
     const screen = document.querySelector("#calculator-screen");
@@ -44,9 +45,22 @@ function handleButtonClick(choice) {
     } else if (mathRange.includes(choice)){
         operand = choice;
         showOperandSelected(operand);
-    } else {
-        console.log("if statement fired");
-        displayNum((operate(firstNum, secondNum, operand)));
+    } else if (decimal.includes(choice)){
+        if (operand === "") {
+            if (!firstNum.includes(decimal)) {
+                firstNum += choice;
+                clearScreen();
+                displayNum(firstNum);
+            }
+        } else if (mathRange.includes(operand)) {
+            if (!secondNum.includes(decimal)) {
+                secondNum += choice;
+                clearScreen();
+                displayNum(secondNum);
+            }
+        } else {
+            console.log("something went wrong");
+        }
     }
 }
 
