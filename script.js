@@ -25,7 +25,7 @@ function handleButton(choice) {
     } else if (choice === "=") {
         handleEquals();
     } else if (choice === decimal) {
-        handleDecimal();
+        handleDecimal(choice);
     }
 }
 
@@ -103,15 +103,18 @@ function getCurrentNumber() {
     return currentNumber;
 }
 
-function handleDecimal() {
-    if (operand === "") {
-        if (!firstNum.includes(decimal)) {
+
+
+
+function handleDecimal(choice) {
+    if (operand === null) {
+        if (!firstNum.toString().includes(decimal)) {
             firstNum += choice;
             clearScreen();
             displayNum(firstNum);
         }
     } else if (mathRange.includes(operand)) {
-        if (!secondNum.includes(decimal)) {
+        if (!secondNum.toString().includes(decimal)) {
             secondNum += choice;
             clearScreen();
             displayNum(secondNum);
