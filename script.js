@@ -32,7 +32,8 @@ function handleButton(choice) {
 
 function handleNumber(choice) {
     if (chainOperation) {
-        secondNum += choice;
+        secondNum = choice;
+        clearScreen();
         displayNum(secondNum);
         chainOperation = false;
     } else if (firstNum === null) {
@@ -65,6 +66,8 @@ function handleOperand(choice) {
         clearScreen();
         let result = operate(firstNum, secondNum, operand);
         firstNum = result;
+        operand = choice;
+        secondNum = null;
         displayNum(result);
         chainOperation = true;
     }
