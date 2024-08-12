@@ -82,9 +82,12 @@ function handleClear() {
 
 function handleEquals() {
         let result = operate(firstNum, secondNum, operand);
-        if (result === undefined) {
+        if (result === undefined || isNaN(result)) {
             result = getCurrentNumber();
             clearScreen();
+        }
+        if (operandSelected) {
+            removeOperandSelected(operand);
         }
         clearScreen();
         displayNum(result);
