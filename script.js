@@ -82,7 +82,7 @@ function handleClear() {
 
 function handleEquals() {
         let result = operate(firstNum, secondNum, operand);
-        if (result === undefined || isNaN(result)) {
+        if (result === undefined || isNaN(result) && typeof result !== "string") {
             result = getCurrentNumber();
             clearScreen();
         }
