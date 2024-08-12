@@ -1,8 +1,10 @@
-let firstNum = '';
-let secondNum = '';
-let operand = '';
+let firstNum = null;
+let secondNum = null;
+let operand = null;
 let operandSelected = false;
 let resultDisplayed = false;
+let chainOperation = false;
+let result = null;
 const numRange = "0123456789";
 const mathRange = "/*-+";
 const decimal = ".";
@@ -12,54 +14,91 @@ document.addEventListener("DOMContentLoaded", () => {
     const buttons = getButtons();
     const clearButton = getClearButton();
 });
-// TODO: implement decimal functionality
 
-function handleButtonClick(choice) {
-    if (choice.toLowerCase() === "clear") {
-        if (operandSelected) {
-            removeOperandSelected(operand);
-        };
+function handleButton(choice) {
+    if (numRange.includes(choice)) {
+        handleNumber(choice);
+    } else if (mathRange.includes(choice)){
+        handleOperand(choice);
+    } else if (choice.toLowerCase() === "clear") {
+        handleClear();
+    } else if (choice === "=") {
+
+        handleEquals();
+    } else if (choice === decimal) {
+        handleDecimal();
+    }
+}
+
+function handleNumber(choice) {
+    if (chainOperation) {
+        secondNum += choice;
+        displayNum(secondNum);
+        chainOperation = false;
+    } else if (firstNum === null) {
+        firstNum = choice;
+        displayNum(firstNum);
+    } else if (operandSelected) {
+        secondNum = choice;
         clearScreen();
-        clearChoices();
-    } else if (numRange.includes(choice)) {
-        if (resultDisplayed) {
-            clearScreen();
-            clearChoices();
-            resultDisplayed = false;
-        }
-        if (operand === '') {
-            firstNum += choice; 
+        displayNum(secondNum);
+        removeOperandSelected(operand);
+    } else if (firstNum) {
+        if (!secondNum) {
+            firstNum += choice;
             clearScreen();
             displayNum(firstNum);
         } else {
             secondNum += choice;
-            removeOperandSelected(operand); 
-            removeCurrentNumber();
+            clearScreen();
             displayNum(secondNum);
         }
-    } else if (choice === "=") {
-        removeCurrentNumber();
-        displayNum(operate(firstNum, secondNum, operand));
-        clearChoices();
-        resultDisplayed = true;
-    } else if (mathRange.includes(choice)){
-        operand = choice;
+
+    }
+}
+
+function handleOperand(choice) {
+    if (operand === null) {
+        operand = choice; 
         showOperandSelected(operand);
-    } else if (decimal.includes(choice)){
-        if (operand === "") {
-            if (!firstNum.includes(decimal)) {
-                firstNum += choice;
-                clearScreen();
-                displayNum(firstNum);
-            }
-        } else if (mathRange.includes(operand)) {
-            if (!secondNum.includes(decimal)) {
-                secondNum += choice;
-                clearScreen();
-                displayNum(secondNum);
-            }
-        } else {
-            console.log("something went wrong");
+    } else if (operand) {
+        clearScreen();
+        let result = operate(firstNum, secondNum, operand);
+        firstNum = result;
+        displayNum(result);
+        chainOperation = true;
+    }
+}
+
+function handleClear() {
+        if (operandSelected) {
+            removeOperandSelected(operand);
+        }
+        clearScreen();
+        clearAllChoices();
+}
+
+function handleEquals() {
+        clearScreen();
+        let result = operate(firstNum, secondNum, operand);
+        displayNum(result);
+        clearAllChoices();
+        firstNum = result;
+        resultDisplayed = true;
+}
+
+function handleDecimal() {
+    if (operand === "") {
+        if (!firstNum.includes(decimal)) {
+            firstNum += choice;
+            clearScreen();
+            displayNum(firstNum);
+        }
+    } else if (mathRange.includes(operand)) {
+        if (!secondNum.includes(decimal)) {
+            secondNum += choice;
+            clearScreen();
+            displayNum(secondNum);
         }
     }
 }
@@ -69,7 +108,7 @@ function getButtons() {
     for (let button of buttonsArray) {
         button.addEventListener("click", () => {
             let choice = button.innerHTML;
-            handleButtonClick(choice);
+            handleButton(choice);
         });
     }
     return buttonsArray;
@@ -84,10 +123,10 @@ function getClearButton() {
     });
 }
 
-function displayNum(choice) {
+function displayNum(num) {
     const numberLine = document.querySelector("#number-line");
     const number = document.createElement('p');
-    number.innerHTML = choice;
+    number.innerHTML = num;
     number.classList.add("numbers");
     numberLine.appendChild(number);
 }
@@ -130,7 +169,6 @@ function multiply(a, b) {
     return a * b;
 }
 
-
 function showOperandSelected(operand) {
     if (mathRange.includes(operand)) {
         const operandButton = document.querySelector(`#${CSS.escape(operand)}`);
@@ -145,7 +183,6 @@ function showOperandSelected(operand) {
     }
 }
 
-
 function removeOperandSelected(operand) {
     const operandButton = document.querySelector(`#${CSS.escape(operand)}`);
     if (operandButton) {
@@ -157,7 +194,6 @@ function removeOperandSelected(operand) {
 }
 
 function clearScreen() {
-    resultDisplayed = false;
     const numberLine = document.querySelector("#number-line");
     if (numberLine) {
         const numberList = document.querySelectorAll(".numbers");
@@ -167,28 +203,11 @@ function clearScreen() {
        } else {
         console.warn(`No element found within ID: number-line`);
     }
-
-    
 }
 
-function removeCurrentNumber() {
-    const numberLine = document.querySelector("#number-line");
-    if (numberLine) {
-        const firstNum = document.querySelector(".numbers");
-        if (firstNum) {
-            numberLine.removeChild(firstNum);
-        } else {
-            console.warn("No element found within class: numbers");
-        }
-    } else {
-        console.warn("No element found within ID: number-line");
-    }
-
+function clearAllChoices() {
+    firstNum = null;
+    secondNum = null;
+    operand = null;
 }
 
-function clearChoices() {
-    firstNum = '';
-    secondNum = '';
-    operand = '';
-    resultDisplayed = false;
-}
