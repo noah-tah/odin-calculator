@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const buttons = getButtons();
     const clearButton = getClearButton();
 });
-
+// TODO: handle "=" button breaking with undefined
 function handleButton(choice) {
     if (numRange.includes(choice)) {
         handleNumber(choice);
@@ -23,7 +23,6 @@ function handleButton(choice) {
     } else if (choice.toLowerCase() === "clear") {
         handleClear();
     } else if (choice === "=") {
-
         handleEquals();
     } else if (choice === decimal) {
         handleDecimal();
@@ -82,12 +81,23 @@ function handleClear() {
 }
 
 function handleEquals() {
-        clearScreen();
         let result = operate(firstNum, secondNum, operand);
+        if (result === undefined) {
+            result = getCurrentNumber();
+            clearScreen();
+        }
+        clearScreen();
         displayNum(result);
         clearAllChoices();
         firstNum = result;
         resultDisplayed = true;
+}
+
+function getCurrentNumber() {
+    let numberLine = document.querySelector("#number-line");
+    let number = document.querySelector(".numbers");
+    let currentNumber = number.innerHTML;
+    return currentNumber;
 }
 
 function handleDecimal() {
