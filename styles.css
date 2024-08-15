@@ -41,15 +41,21 @@ body {
     gap: 1px;
 }
 
-#clear-button-container{
+#top-buttons-container{
     display: flex;
     width: 100%;
     justify-content: flex-end;
+    gap: 5px;
 }
 
 #clear-button {
-    padding: 37px;
-    box-shadow: inset black 0 0 2px 2px;
+    padding: 25px;
+    box-shadow: inset black 0 0 3px 3px;
+}
+
+#backspace-button {
+    padding: 25px;
+    box-shadow: inset black 0 0 3px 3px;
 }
 
 #number-line {
@@ -70,7 +76,7 @@ body {
     padding: 49px;
     font-size: 40px;
     flex: 1;
-    box-shadow: inset black 0 0 2px 2px;
+    box-shadow: inset black 0 0 3px 3px;
 }
 
 .numbers {
@@ -79,5 +85,9 @@ body {
 }
 
 .button-pressed {
-    background-color: gray;
+    background-color: black !important; 
+} 
+
+.operators {
+    background-color: #e7d1ff;
 }

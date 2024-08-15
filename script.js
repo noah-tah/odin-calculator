@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const buttons = getButtons();
     const clearButton = getClearButton();
 });
-// TODO: handle "=" button breaking with undefined
+
 function handleButton(choice) {
     if (numRange.includes(choice)) {
         handleNumber(choice);
@@ -26,6 +26,8 @@ function handleButton(choice) {
         handleEquals();
     } else if (choice === decimal) {
         handleDecimal(choice);
+    } else if (choice.toLowerCase() == "del") {
+        handleBackspace();
     }
 }
 
@@ -66,6 +68,7 @@ function handleOperand(choice) {
         let result = operate(firstNum, secondNum, operand);
         firstNum = result;
         operand = choice;
+        showOperandSelected(operand);
         secondNum = null;
         displayNum(result);
         chainOperation = true;
@@ -230,3 +233,21 @@ function clearAllChoices() {
     operand = null;
 }
 
+function handleBackspace() {
+    const numberLine = document.querySelector("#number-line");
+    let numbers = numberLine.textContent;
+    let numberArray = Array.from(numbers);
+    let length = numberArray.length;
+    let backspacedNum = numberArray.pop();
+    let newNumber = numberArray.join("");
+    if (firstNum && secondNum === null) {
+        firstNum = newNumber;
+        clearScreen();
+        displayNum(firstNum);
+    } else {
+        secondNum = newNumber;
+        clearScreen();
+        displayNum(secondNum);
+    }
+
+}
