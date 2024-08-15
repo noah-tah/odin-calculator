@@ -250,4 +250,10 @@ function handleBackspace() {
         displayNum(secondNum);
     }
 
+    if (firstNum.length === 0) {
+        firstNum = null;
+    } else if (secondNum.length === 0) {
+        secondNum = null;
+    }
+
 }
