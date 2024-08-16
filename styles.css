@@ -5,7 +5,8 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #008080;
+
+    background-color: #264653 !important; 
 }
 
 #calculator-container {
@@ -14,8 +15,7 @@ body {
     justify-content: flex-start;
     align-items: center;
     gap: 15px;
-    background-color:#065535;
-    background: linear-gradient(-45deg, #065535, green);
+    background-color: #e76f51;
     padding-top: 10px;
     padding-bottom: 20px;
     padding-right: 40px;
@@ -29,9 +29,8 @@ body {
     padding-right: 250px;
     padding-top: 140px;
     padding-bottom: 140px;
-    background-color: lightgrey;
+    background-color: #fefae0;
     margin-top: 20px;
-    background: linear-gradient(45deg, lightgrey, gray);
     box-shadow: inset black 0 0 4px 4px;
 }
 
@@ -72,11 +71,18 @@ body {
     border-radius: .5em;
 }
 
-.buttons {
+.number-buttons {
     padding: 49px;
     font-size: 40px;
     flex: 1;
+    background-color: #E9C46A;
     box-shadow: inset black 0 0 3px 3px;
+}
+
+.operator-buttons {
+    box-shadow: inset black 0 0 3px 3px;
+    background-color: #2a9d8f;
+
 }
 
 .numbers {
@@ -84,10 +90,16 @@ body {
     font-size: 30px;
 }
 
-.button-pressed {
-    background-color: black !important; 
+
+.operator-button-pressed {
+    background-color: #F4A261;
 } 
 
 .operators {
-    background-color: #e7d1ff;
+    padding: 49px;
+    font-size: 40px;
+    background-color: #2a9d8f;
+    box-shadow: inset black 0 0 3px 3px;
+    flex: 1;
+
 }

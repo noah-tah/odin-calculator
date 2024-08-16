@@ -195,7 +195,7 @@ function showOperandSelected(operand) {
     if (mathRange.includes(operand)) {
         const operandButton = document.querySelector(`#${CSS.escape(operand)}`);
         if (operandButton) {
-            operandButton.classList.add("button-pressed");
+            operandButton.classList.add("operator-button-pressed");
             operandSelected = true;
         } else {
             console.warn(`No element found with ID: ${operand}`);
@@ -208,7 +208,7 @@ function showOperandSelected(operand) {
 function removeOperandSelected(operand) {
     const operandButton = document.querySelector(`#${CSS.escape(operand)}`);
     if (operandButton) {
-        operandButton.classList.remove("button-pressed");
+        operandButton.classList.remove("operator-button-pressed");
         operandSelected = false;
     } else {
         console.warn(`No element found with ID: ${operand}`);
@@ -240,6 +240,9 @@ function handleBackspace() {
     let length = numberArray.length;
     let backspacedNum = numberArray.pop();
     let newNumber = numberArray.join("");
+    if (operandSelected) {
+        removeOperandSelected();
+    }
     if (firstNum && secondNum === null) {
         firstNum = newNumber;
         clearScreen();
