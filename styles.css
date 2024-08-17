@@ -15,7 +15,7 @@ body {
     justify-content: flex-start;
     align-items: center;
     gap: 15px;
-    background-color: #e76f51;
+    background-color: #31393c;
     padding-top: 10px;
     padding-bottom: 20px;
     padding-right: 40px;
@@ -25,11 +25,11 @@ body {
 }
 
 #calculator-screen {
-    padding-left: 250px;
-    padding-right: 250px;
+    padding-left: 240px;
+    padding-right: 240px;
     padding-top: 140px;
     padding-bottom: 140px;
-    background-color: #fefae0;
+    background-color: #f3e9d2;
     margin-top: 20px;
     box-shadow: inset black 0 0 4px 4px;
 }
@@ -71,17 +71,19 @@ body {
     border-radius: .5em;
 }
 
+
 .number-buttons {
     padding: 49px;
     font-size: 40px;
     flex: 1;
-    background-color: #E9C46A;
+    background-color: #c6dabf;
     box-shadow: inset black 0 0 3px 3px;
 }
 
 .operator-buttons {
     box-shadow: inset black 0 0 3px 3px;
-    background-color: #2a9d8f;
+    background-color: #1a936f;
+    color: #fefae0;
 
 }
 
@@ -91,14 +93,38 @@ body {
 }
 
 
-.operator-button-pressed {
-    background-color: #F4A261;
-} 
+
 
 .operators {
     padding: 49px;
     font-size: 40px;
-    background-color: #2a9d8f;
+    background-color: #1a936f;
+    box-shadow: inset black 0 0 3px 3px;
+    flex: 1;
+
+}
+
+.buttons {
+    color: #f3e9d2;
+}
+
+.buttons:hover {
+    box-shadow: inset black 0 0 5px 5px !important;
+}
+/* .operator-buttons-background {
+    background-color: #1a936f;
+    color: red;
+} */
+
+.operator-button-pressed {
+    box-shadow: inset black 0 0 5px 5px !important;
+} 
+
+.top-buttons {
+    padding: 45px;
+    font-size: 35px;
+    background-color: #1a936f;
+    color: #f3e9d2;
     box-shadow: inset black 0 0 3px 3px;
     flex: 1;
 
